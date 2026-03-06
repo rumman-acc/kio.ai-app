@@ -1,87 +1,71 @@
-# Active Context: Next.js Starter Template
+# Active Context: NestJS Starter Template
 
 ## Current State
 
 **Template Status**: ✅ Ready for development
 
-The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. It's ready for AI-assisted expansion to build any type of application.
+The template is now a NestJS backend service with TypeScript. It's ready for building REST APIs and microservices.
 
 ## Recently Completed
 
-- [x] Base Next.js 16 setup with App Router
-- [x] TypeScript configuration with strict mode
-- [x] Tailwind CSS 4 integration
+- [x] Converted from Next.js to NestJS
+- [x] NestJS 11 setup with TypeScript
+- [x] Basic service and controller structure
 - [x] ESLint configuration
-- [x] Memory bank documentation
-- [x] Recipe system for common features
+- [x] Memory bank documentation updated
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
-| `src/app/page.tsx` | Home page | ✅ Ready |
-| `src/app/layout.tsx` | Root layout | ✅ Ready |
-| `src/app/globals.css` | Global styles | ✅ Ready |
+| `src/main.ts` | Application entry point | ✅ Ready |
+| `src/app.module.ts` | Root module | ✅ Ready |
+| `src/app.service.ts` | Business logic service | ✅ Ready |
+| `src/app.controller.ts` | HTTP controller | ✅ Ready |
+| `nest-cli.json` | NestJS CLI config | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
 
 ## Current Focus
 
 The template is ready. Next steps depend on user requirements:
 
-1. What type of application to build
-2. What features are needed
-3. Design/branding preferences
+1. What kind of API endpoints are needed
+2. Database integration (if needed)
+3. Authentication setup (if needed)
+4. Additional modules
 
 ## Quick Start Guide
 
-### To add a new page:
+### To run the application:
 
-Create a file at `src/app/[route]/page.tsx`:
-```tsx
-export default function NewPage() {
-  return <div>New page content</div>;
-}
+```bash
+bun run dev    # Development mode with hot reload
+bun run build  # Production build
+bun run start  # Start production server
 ```
 
-### To add components:
+### To add a new module:
 
-Create `src/components/` directory and add components:
-```tsx
-// src/components/ui/Button.tsx
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className="px-4 py-2 bg-blue-600 text-white rounded">{children}</button>;
-}
+```bash
+nest g module <module-name>
+nest g controller <module-name>
+nest g service <module-name>
 ```
 
-### To add a database:
+### Default Endpoints:
 
-Follow `.kilocode/recipes/add-database.md`
-
-### To add API routes:
-
-Create `src/app/api/[route]/route.ts`:
-```tsx
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  return NextResponse.json({ message: "Hello" });
-}
-```
-
-## Available Recipes
-
-| Recipe | File | Use Case |
-|--------|------|----------|
-| Add Database | `.kilocode/recipes/add-database.md` | Data persistence with Drizzle + SQLite |
+- `GET /` - Returns hello message
+- `GET /version` - Returns version info
 
 ## Pending Improvements
 
-- [ ] Add more recipes (auth, email, etc.)
-- [ ] Add example components
-- [ ] Add testing setup recipe
+- [ ] Add database integration recipe
+- [ ] Add authentication module
+- [ ] Add example modules
 
 ## Session History
 
 | Date | Changes |
 |------|---------|
 | Initial | Template created with base setup |
+| Updated | Converted to NestJS backend service |

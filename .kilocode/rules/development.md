@@ -14,25 +14,36 @@
 | Command | Purpose |
 |---------|---------|
 | `bun install` | Install dependencies |
-| `bun build` | Build production app |
+| `bun run dev` | Start dev server with hot reload |
+| `bun run build` | Build production app |
+| `bun run start` | Start production server |
 | `bun lint` | Check code quality |
 | `bun typecheck` | Type checking |
 
 ## Best Practices
 
-### React/Next.js
-- Use Server Components by default; add `"use client"` only when needed
-- Use `next/image` for optimized images
-- Use `next/link` for client-side navigation
-- Use `error.tsx` for error boundaries
-- Use `not-found.tsx` for 404 pages
+### NestJS Development
+- Use modules to organize your code
+- Use services for business logic
+- Use controllers for HTTP endpoints
+- Use DTOs for data validation
 
-### API Routes
-- Return `NextResponse.json({ error: "..." }, { status: 500 })` on failure
-- Always include appropriate status codes
+### REST API Best Practices
+- Return appropriate HTTP status codes
 - Handle errors gracefully
+- Use proper HTTP methods (GET, POST, PUT, DELETE, PATCH)
 
 ### Code Quality
 - Run `bun typecheck` before committing
 - Run `bun lint` before committing
 - Write descriptive commit messages
+
+## Adding New Modules
+
+To add a new feature module:
+
+```bash
+nest g module <module-name>
+nest g controller <module-name>
+nest g service <module-name>
+```

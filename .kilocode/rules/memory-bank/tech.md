@@ -1,13 +1,11 @@
-# Technical Context: Next.js Starter Template
+# Technical Context: NestJS Starter Template
 
 ## Technology Stack
 
 | Technology   | Version | Purpose                         |
 | ------------ | ------- | ------------------------------- |
-| Next.js      | 16.x    | React framework with App Router |
-| React        | 19.x    | UI library                      |
+| NestJS       | 11.x    | Node.js framework               |
 | TypeScript   | 5.9.x   | Type-safe JavaScript            |
-| Tailwind CSS | 4.x     | Utility-first CSS               |
 | Bun          | Latest  | Package manager & runtime       |
 
 ## Development Environment
@@ -21,35 +19,26 @@
 
 ```bash
 bun install        # Install dependencies
-bun dev            # Start dev server (http://localhost:3000)
-bun build          # Production build
-bun start          # Start production server
+bun run dev        # Start dev server (http://localhost:3000)
+bun run build      # Production build
+bun run start      # Start production server
 bun lint           # Run ESLint
-bun typecheck      # Run TypeScript type checking
+bun run typecheck  # Run TypeScript type checking
 ```
 
 ## Project Configuration
 
-### Next.js Config (`next.config.ts`)
+### NestJS CLI Config (`nest-cli.json`)
 
-- App Router enabled
-- Default settings for flexibility
+- Uses `@nestjs/schematics` for generating files
+- Source root set to `src/`
 
 ### TypeScript Config (`tsconfig.json`)
 
+- Target: ES2021
+- CommonJS module system
+- Decorators enabled for NestJS
 - Strict mode enabled
-- Path alias: `@/*` → `src/*`
-- Target: ESNext
-
-### Tailwind CSS 4 (`postcss.config.mjs`)
-
-- Uses `@tailwindcss/postcss` plugin
-- CSS-first configuration (v4 style)
-
-### ESLint (`eslint.config.mjs`)
-
-- Uses `eslint-config-next`
-- Flat config format
 
 ## Key Dependencies
 
@@ -57,9 +46,11 @@ bun typecheck      # Run TypeScript type checking
 
 ```json
 {
-  "next": "^16.1.3", // Framework
-  "react": "^19.2.3", // UI library
-  "react-dom": "^19.2.3" // React DOM
+  "@nestjs/common": "^11.0.0",    // NestJS core
+  "@nestjs/core": "^11.0.0",      // NestJS core
+  "@nestjs/platform-express": "^11.0.0",  // Express adapter
+  "reflect-metadata": "^0.2.2",   // Decorator metadata
+  "rxjs": "^7.8.1"                // Reactive extensions
 }
 ```
 
@@ -67,14 +58,13 @@ bun typecheck      # Run TypeScript type checking
 
 ```json
 {
-  "typescript": "^5.9.3",
-  "@types/node": "^24.10.2",
-  "@types/react": "^19.2.7",
-  "@types/react-dom": "^19.2.3",
-  "@tailwindcss/postcss": "^4.1.17",
-  "tailwindcss": "^4.1.17",
-  "eslint": "^9.39.1",
-  "eslint-config-next": "^16.0.0"
+  "@nestjs/cli": "^11.0.0",       // NestJS CLI
+  "@nestjs/schematics": "^11.0.0", // Code generators
+  "typescript": "^5.9.3",          // TypeScript
+  "@types/node": "^24.10.2",      // Node types
+  "eslint": "^9.39.1",            // ESLint
+  "@eslint/js": "^9.17.0",        // ESLint JS config
+  "typescript-eslint": "^8.19.1" // TypeScript ESLint
 }
 ```
 
@@ -85,18 +75,14 @@ bun typecheck      # Run TypeScript type checking
 ├── .gitignore              # Git ignore rules
 ├── package.json            # Dependencies and scripts
 ├── bun.lock                # Bun lockfile
-├── next.config.ts          # Next.js configuration
+├── nest-cli.json           # NestJS CLI configuration
 ├── tsconfig.json           # TypeScript configuration
-├── postcss.config.mjs      # PostCSS (Tailwind) config
 ├── eslint.config.mjs       # ESLint configuration
-├── public/                 # Static assets
-│   └── .gitkeep
 └── src/                    # Source code
-    └── app/                # Next.js App Router
-        ├── layout.tsx      # Root layout
-        ├── page.tsx        # Home page
-        ├── globals.css     # Global styles
-        └── favicon.ico     # Site icon
+    ├── main.ts             # Application entry point
+    ├── app.module.ts       # Root module
+    ├── app.controller.ts   # HTTP controller
+    └── app.service.ts      # Business logic service
 ```
 
 ## Technical Constraints
@@ -107,37 +93,29 @@ bun typecheck      # Run TypeScript type checking
 - No database by default (use recipe to add)
 - No authentication by default (add when needed)
 
-### Browser Support
+### Node.js Support
 
-- Modern browsers (ES2020+)
-- No IE11 support
+- Node.js 20+
+- Modern JavaScript features
 
-## Performance Considerations
+## Running the Application
 
-### Image Optimization
+### Development Mode
 
-- Use Next.js `Image` component for optimization
-- Place images in `public/` directory
+```bash
+bun run dev
+```
 
-### Bundle Size
+The server starts on `http://localhost:3000` with hot reload enabled.
 
-- Tree-shaking enabled by default
-- Tailwind CSS purges unused styles
+### Available Endpoints
 
-### Core Web Vitals
+- `GET /` - Returns hello message
+- `GET /version` - Returns version info
 
-- Server Components reduce client JavaScript
-- Streaming and Suspense for better UX
+## Building for Production
 
-## Deployment
-
-### Build Output
-
-- Server-rendered pages by default
-- Can be configured for static export
-
-### Environment Variables
-
-- None required for base template
-- Add as needed for features
-- Use `.env.local` for local development
+```bash
+bun run build   # Compiles to dist/
+bun run start   # Runs production build
+```

@@ -1,10 +1,20 @@
-import nextConfig from "eslint-config-next";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-const eslintConfig = [
-  ...nextConfig,
+export default tseslint.config(
   {
-    ignores: ["node_modules/**"],
+    ignores: ['dist', 'node_modules', 'coverage'],
   },
-];
-
-export default eslintConfig;
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.ts'],
+    languageOptions: {
+      ecmaVersion: 2021,
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
+);
